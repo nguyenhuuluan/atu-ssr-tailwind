@@ -42,21 +42,22 @@ $drawerWidth: 260;
   width: 100%;
 }
 
-.container {
-  @extend .containerFluid;
+// .container {
+//   @extend .containerFluid;
+//   margin-left: auto;
 
-  @media (min-width: 768px) {
-    max-width: 750px;
-  }
+//   @media (min-width: 768px) {
+//     max-width: 750px;
+//   }
 
-  @media (min-width: 992) {
-    max-width: 970px;
-  }
+//   @media (min-width: 992) {
+//     max-width: 970px;
+//   }
 
-  @media (min-width: 1200px) {
-    max-width: 1170px;
-  }
-}
+//   @media (min-width: 1200px) {
+//     max-width: 1170px;
+//   }
+// }
 
 a {
   color: inherit;

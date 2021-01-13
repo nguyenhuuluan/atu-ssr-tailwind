@@ -9,10 +9,42 @@ const LoginPage = (props) => {
   };
 
   const loginHeader = () => (
-    <div>
-      <h1>Header will be here</h1>
-      <p>dsa</p>
-    </div>
+    <header className="bg-gray-300 w-full text-white z-100 fixed flex flex-start items-center rounded-md p-0 shadow-xl">
+      <div
+        className="container flex flex-nowrap flex-1 justify-between items-center px-4 mx-auto"
+        style={{ minHeight: '50px' }}
+      >
+        <div className="container">
+          <div className="flex flex-row items-center ">
+            <img alt="logo" src="/img/logo.png" style={{ height: '41px', width: '41px' }} />
+            <h3>dsa</h3>
+          </div>
+        </div>
+        <div className="">
+          <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+            <a href="#" class="font-medium text-gray-500 hover:text-gray-900">
+              Product
+            </a>
+
+            <a href="#" className="font-medium text-gray-500 hover:text-gray-900">
+              Features
+            </a>
+
+            <a href="#" className="font-medium text-gray-500 hover:text-gray-900">
+              Marketplace
+            </a>
+
+            <a href="#" className="font-medium text-gray-500 hover:text-gray-900">
+              Company
+            </a>
+
+            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+              Log in
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
   );
   const loginBody = () => (
     <div
