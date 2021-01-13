@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Nav from '../../components/Nav/nav.component';
 import style from './index.module.scss';
 const LoginPage = (props) => {
   const router = useRouter();
@@ -9,6 +10,12 @@ const LoginPage = (props) => {
   };
 
   const loginHeader = () => (
+    <header>
+      <Nav color="transparent2" />
+    </header>
+  );
+
+  const loginHeader2 = () => (
     <header className="bg-gray-300 w-full text-white z-100 fixed flex flex-start items-center rounded-md p-0 shadow-xl">
       <div
         className="container flex flex-nowrap flex-1 justify-between items-center px-4 mx-auto"
