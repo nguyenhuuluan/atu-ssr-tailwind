@@ -27,7 +27,7 @@ const LoginPage = (props) => {
             <h3>dsa</h3>
           </div>
         </div>
-        <div className="">
+        <div className="container">
           <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
             <a href="#" class="font-medium text-gray-500 hover:text-gray-900">
               Product
