@@ -11,7 +11,7 @@ const LoginPage = (props) => {
 
   const loginHeader = () => (
     <header>
-      <Nav color="transparent2" />
+      <Nav color="transparent" />
     </header>
   );
 

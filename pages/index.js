@@ -1,13 +1,17 @@
 import React from 'react';
 import Footer from '../components/Footer/footer.component';
 import Header from '../components/Header/header.component';
+import Slider from '../components/Slider/slider.component';
 // import Header from '../components/header.component';
 
-const Home = () => (
-  <div className="wrapper">
-    <Header />
-    <div name="homepage-body">
-      <h1>This is home page</h1>
+const generateHeader = () => <Header />;
+
+const generateBody = () => (
+  <div name="homepage-body">
+    <h1>This is home page</h1>
+    <Slider height="40%" width="60%" />
+
+    <div className="m-36">
       <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
         <div className="flex-shrink-0">{/* <img class="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo"> */}</div>
         <div>
@@ -16,7 +20,16 @@ const Home = () => (
         </div>
       </div>
     </div>
-    <Footer className="absolute bg-gray-800" />
+  </div>
+);
+
+const generateFooter = () => <Footer className="bg-gray-800" />;
+
+const Home = () => (
+  <div className="wrapper">
+    {generateHeader()}
+    {generateBody()}
+    {generateFooter()}
   </div>
 );
 

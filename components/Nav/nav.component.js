@@ -11,14 +11,14 @@ const Nav = (props) => {
   console.log('Nav', props);
   const { color } = props;
 
-  const navClass = `w-full z-100 flex flex-start items-center rounded-md p-0 ${
+  const navClass = `w-full z-100 tracking-wider fixed flex flex-start items-center p-0 ${
     color === 'transparent' ? 'bg-transparent text-white' : 'bg-white shadow-xl'
   }`;
 
   return (
     <NavBar id="nav-header" className={navClass}>
       <div
-        className="container flex flex-nowrap flex-1 whitespace-nowrap justify-between items-center px-4 mx-auto"
+        className="container flex flex-nowrap flex-1 whitespace-nowrap justify-between items-center px-4 mx-auto md:px-8"
         style={{ minHeight: '50px' }}
       >
         <div id="nav-logo" className="inline-flex items-center py-2">
