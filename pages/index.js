@@ -1,7 +1,7 @@
 import React from 'react';
+import Carousel from '../components/Carousel/carousel.component';
 import Footer from '../components/Footer/footer.component';
 import Header from '../components/Header/header.component';
-import Slider from '../components/Slider/slider.component';
 // import Header from '../components/header.component';
 
 const generateHeader = () => <Header />;
@@ -9,7 +9,7 @@ const generateHeader = () => <Header />;
 const generateBody = () => (
   <div name="homepage-body">
     <h1>This is home page</h1>
-    <Slider height="40%" width="60%" />
+    <Carousel height="40%" width="60%" />
 
     <div className="m-36">
       <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">

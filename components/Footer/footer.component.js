@@ -1,6 +1,5 @@
 const Footer = (props) => {
   const { className } = props;
-  console.log('Footer', props);
 
   return (
     <footer id="footer" className={`w-full bottom-0 px-0 pt-10 pb-5 text-white ${className}`}>

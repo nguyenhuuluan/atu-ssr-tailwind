@@ -8,7 +8,6 @@ const NavBar = styled.nav`
 `;
 
 const Nav = (props) => {
-  console.log('Nav', props);
   const { color } = props;
 
   const navClass = `w-full z-100 tracking-wider fixed flex flex-start items-center p-0 ${
@@ -24,14 +23,14 @@ const Nav = (props) => {
         <div id="nav-logo" className="inline-flex items-center py-2">
           <a href="#logo" className="inline-flex">
             <img alt="logo" src="/img/logo.png" style={{ height: '41px', width: '41px' }} />
-            <span className="pl-2">Creative Tim</span>
+            <span className="pl-2">Creative Atu</span>
           </a>
           <a href="#logo">
             <span
               className="pl-3 ml-3 text-gray-500 hover:text-gray-900"
               style={{ borderLeft: '1px solid rgba(44, 50, 65, 0.2)' }}
             >
-              Atu Store
+              Store
             </span>
           </a>
         </div>
