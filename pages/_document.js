@@ -24,6 +24,7 @@ export default class MyDocument extends Document {
           <title>My page</title>
           {/* Step 5: Output the styles in the head  */}
           {this.props.styleTags}
+          <script src="https://kit.fontawesome.com/a076d05399.js" />
         </Head>
         <body>
           <Main />
