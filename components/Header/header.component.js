@@ -5,7 +5,7 @@ const Header = (props) => {
 
   return (
     <header id="header" className="bg-red-200" style={{ height: '90vh' }}>
-      <Nav blur="2rem" />
+      <Nav />
       <div
         className="h-screen relative flex items-center"
         style={{
