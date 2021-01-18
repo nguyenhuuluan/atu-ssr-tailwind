@@ -1,12 +1,8 @@
 import React from 'react';
 import Carousel from '../components/Carousel/carousel.component';
-import Footer from '../components/Footer/footer.component';
-import Header from '../components/Header/header.component';
-// import Header from '../components/header.component';
+import withWebAppLayout from '../components/Layout/webapp.layout';
 
-const generateHeader = () => <Header />;
-
-const generateBody = () => (
+const Home = () => (
   <div name="homepage-body">
     <h1>This is home page</h1>
     <Carousel height="40%" width="60%" />
@@ -23,14 +19,5 @@ const generateBody = () => (
   </div>
 );
 
-const generateFooter = () => <Footer className="bg-gray-800" />;
-
-const Home = () => (
-  <div className="wrapper">
-    {generateHeader()}
-    {generateBody()}
-    {generateFooter()}
-  </div>
-);
-
-export default Home;
+// export default Home;
+export default withWebAppLayout(Home);

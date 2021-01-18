@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
+import NavLogo from './nav.logo.component';
 
 const Input = styled.input`
   display: none;
@@ -51,7 +52,7 @@ const ToggleLabel = styled.label`
   padding: 0.5rem;
   cursor: pointer;
   border-radius: 50%;
-  :hover {
+  :hover, :focus {
     background-color: rgba(55, 65, 81, 0.1);
     color: rgba(55, 65, 81, 0.7);
   }
@@ -104,35 +105,17 @@ const Nav = (props) => {
   return (
     <NavBar id="nav-header" className={navClass} blur={blur}>
       <div id="nav-list" className="flex flex-start items-center flex-wrap">
-        <ul
-          className="container flex flex-nowrap flex-1 whitespace-nowrap justify-between items-center px-4 mx-auto md:px-8"
-          style={{ minHeight: '50px' }}
-        >
-          <li id="nav-logo" className="inline-flex items-center py-2">
-            <a href="#logo" className="inline-flex">
-              <img alt="logo" src="/img/logo.png" style={{ height: '41px', width: '41px' }} />
-              <span className="pl-2">Creative Atu</span>
-            </a>
-            <a href="#logo">
-              <span
-                className="pl-3 ml-3 text-gray-500 hover:text-gray-900"
-                style={{ borderLeft: '1px solid rgba(44, 50, 65, 0.2)' }}
-              >
-                Store
-              </span>
-            </a>
-          </li>
-        </ul>
+        <NavLogo />
 
-        <ul className="flex md:hidden px-4">
+        <div className="flex md:hidden px-4">
           <li>
             <ToggleLabel htmlFor="is-mobile" onClick={handleDrawerToggle}>
               <Input type="checkbox" id="is-mobile" className="is-mobile" />
               <i aria-hidden className="fas fa-bars" />
             </ToggleLabel>
           </li>
-        </ul>
-        <ul className="flex items-center justify-center w-full md:w-auto">{generateNavList()}</ul>
+        </div>
+        <ul id="nav-menu" className="flex items-center justify-center w-full md:w-auto">{generateNavList()}</ul>
       </div>
     </NavBar>
   );
