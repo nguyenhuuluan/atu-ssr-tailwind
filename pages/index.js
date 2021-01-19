@@ -7,7 +7,7 @@ const Home = () => (
     <h1>This is home page</h1>
     <Carousel height="40%" width="60%" />
 
-    <div className="m-36">
+    <div className="mt-36">
       <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
         <div className="flex-shrink-0">{/* <img class="h-12 w-12" src="/img/logo.svg" alt="ChitChat Logo"> */}</div>
         <div>
