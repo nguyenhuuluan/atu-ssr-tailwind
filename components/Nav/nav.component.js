@@ -40,17 +40,55 @@ const NavBar = styled.nav`
 const ToggleLabel = styled.label`
   padding: 0.5rem;
   cursor: pointer;
-  border-radius: 50%;
-  upp :hover,
+  z-index: 101;
+  /* border-radius: 50%;
+  :hover,
   :focus {
     background-color: rgba(55, 65, 81, 0.1);
     color: rgba(55, 65, 81, 0.7);
+  } */
+  & span {
+    position: absolute;
+    width: 1.7rem;
+    height: 2px;
+    background-color: #fff;
+    transition: margin-top 0.1806s 0.1806s cubic-bezier(0.04, 0.04, 0.12, 0.96),
+      transform 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96);
+    /* transition: transform 0.3192s cubic-bezier(0.52, 0.16, 0.52, 0.84); */
+
+    &.line-top {
+      margin-top: -3px;
+      /* transition: margin-top 3s cubic-bezier(0.04, 0.04, 0.12, 0.96); */
+      /* transition: margin-top 5s 5s cubic-bezier(0.04, 0.04, 0.12, 0.96);
+      transition: transform 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96); */
+      &.active {
+        margin-top: 0;
+        transform: rotate(45deg);
+        transition: margin-top 0.1806s cubic-bezier(0.04, 0.04, 0.12, 0.96),
+          transform 0.3192s 0.1008s cubic-bezier(0.04, 0.04, 0.12, 0.96);
+      }
+    }
+
+    &.line-bottom {
+      margin-top: 3px;
+      &.active {
+        margin-top: 0;
+        transform: rotate(-45deg);
+        transition: margin-top 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96),
+          transform 0.3192s 0.1596s cubic-bezier(0.04, 0.04, 0.12, 0.96);
+      }
+    }
   }
   /* p-2 hover:text-gray-400 hover:bg-gray-700 hover:bg-opacity-10 rounded-full cursor-pointer */
 `;
 const NavLink = styled.ul`
   /* display: inline-block; */
   /* list-style: none; */
+  transition: all 0.2s ease-out;
+
+  &.active {
+    left: 0;
+  }
   & li {
   }
 
@@ -96,9 +134,13 @@ const generateNavList = () => (
 const handleDrawerToggle = (e) => {
   if (e.target.checked) {
     document.body.getElementsByClassName('nav-link-list')[0].classList.add('active');
+    document.body.getElementsByClassName('line-top')[0].classList.add('active');
+    document.body.getElementsByClassName('line-bottom')[0].classList.add('active');
     // document.body.getElementsByClassName('nav-link-list')[0].classList.remove('hidden');
   } else {
     document.body.getElementsByClassName('nav-link-list')[0].classList.remove('active');
+    document.body.getElementsByClassName('line-top')[0].classList.remove('active');
+    document.body.getElementsByClassName('line-bottom')[0].classList.remove('active');
     // document.body.getElementsByClassName('nav-link-list')[0].classList.add('hidden');
   }
 };
@@ -108,7 +150,6 @@ const Nav = (props) => {
   // const navClass = `tracking-wider ${
   //   color === 'transparent' ? 'bg-transparent text-white' : 'bg-white shadow-xl bg-opacity-75'
   // }`;
-  console.log(fixed);
   useEffect(() => {
     function handleMobileResize() {
       const ele = document.body.getElementsByClassName('is-mobile')[0];
@@ -144,12 +185,14 @@ const Nav = (props) => {
         {/* Navigation List Link */}
         <div className="md:inline-block text">{generateNavList()}</div>
 
-        {/* Navigation Toggle Mobile Icon */}
+        {/* Navigation Menu */}
         <div className="inline-block md:hidden">
           <div className="flex md:hidden">
             <ToggleLabel htmlFor="is-mobile" onClick={handleDrawerToggle}>
               <Input type="checkbox" id="is-mobile" className="is-mobile" />
-              <i aria-hidden className="fas fa-bars" />
+              {/* <i aria-hidden className="fas fa-bars" /> */}
+              <span className="line-top" />
+              <span className="line-bottom" />
             </ToggleLabel>
           </div>
         </div>

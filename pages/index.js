@@ -4,7 +4,7 @@ import withWebAppLayout from '../components/Layout/webapp.layout';
 
 const Home = () => (
   <div name="homepage-body">
-    <h1>This is home page</h1>
+    <h1>This is home page </h1>
     <Carousel height="40%" width="60%" />
 
     <div className="mt-36">

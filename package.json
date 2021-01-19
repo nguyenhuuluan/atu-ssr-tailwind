@@ -18,7 +18,6 @@
     "styled-components": "^5.2.1",
     "tailwindcss": "^2.0.2",
     "prop-types": "^15.7.2"
-
   },
   "eslintConfig": {
     "extends": [
