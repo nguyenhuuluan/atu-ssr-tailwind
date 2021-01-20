@@ -18,21 +18,23 @@ const NavBar = styled.nav`
   width: 100%;
   position: ${({ fixed }) => (fixed ? 'fixed' : 'absolute')};
   z-index: 100;
-  padding: 0 2em;
-  padding-bottom: ${({ background }) => (background !== 'transparent' ? 0 : '1em')};
+  padding: 0.5em 1.5em 0.5em 1.5em;
+  padding-bottom: ${({ background }) => (background !== 'transparent' ? 0 : '1.5em')};
   box-shadow: ${({ background }) =>
     background !== 'transparent' ? '0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)' : 'none'};
   background: ${({ background }) => background};
-  backdrop-filter: ${({ blur }) => (blur ? `blur(${blur})` : 'none')};
+  backdrop-filter: ${({ blur, background }) => (background !== 'transparent' && blur ? `blur(${blur})` : 'none')};
   transition: all 0.3s ease;
 
-  &.fixed {
+  &.sticky {
     position: fixed;
-    padding-bottom: 0;
+    padding-bottom: 0.5em;
     background: ${({ fixedBackground }) => fixedBackground};
     opacity: ${({ opacity }) => opacity};
+    backdrop-filter: ${({ blur }) => (blur ? `blur(${blur})` : 'none')};
     & .nav-link-list li a:hover {
       color: #fff;
+      color: ${({ textColorFixedHover }) => textColorFixedHover};
     }
   }
 `;
@@ -54,13 +56,9 @@ const ToggleLabel = styled.label`
     background-color: #fff;
     transition: margin-top 0.1806s 0.1806s cubic-bezier(0.04, 0.04, 0.12, 0.96),
       transform 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96);
-    /* transition: transform 0.3192s cubic-bezier(0.52, 0.16, 0.52, 0.84); */
 
     &.line-top {
       margin-top: -3px;
-      /* transition: margin-top 3s cubic-bezier(0.04, 0.04, 0.12, 0.96); */
-      /* transition: margin-top 5s 5s cubic-bezier(0.04, 0.04, 0.12, 0.96);
-      transition: transform 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96); */
       &.active {
         margin-top: 0;
         transform: rotate(45deg);
@@ -79,7 +77,6 @@ const ToggleLabel = styled.label`
       }
     }
   }
-  /* p-2 hover:text-gray-400 hover:bg-gray-700 hover:bg-opacity-10 rounded-full cursor-pointer */
 `;
 const NavLink = styled.ul`
   /* display: inline-block; */
@@ -97,7 +94,7 @@ const NavLink = styled.ul`
     transition: color 0.3s ease;
 
     :hover {
-      color: crimson;
+      color: ${({ textColorHover }) => textColorHover};
     }
   }
 
@@ -106,16 +103,14 @@ const NavLink = styled.ul`
   } */
 `;
 
-const generateNavList = () => (
-  <NavLink className="nav-link-list fixed md:static h-screen md:h-auto bg-black md:bg-transparent top-0 -left-full md:top-auto md:left-auto w-full md:w-auto inline-flex flex-col items-center justify-center md:flex-row flex-wrap space-x-0 md:space-x-4 space-y-4 md:space-y-0">
+const generateNavList = (props) => (
+  <NavLink
+    textColorHover={props.textColorHover}
+    className="nav-link-list fixed md:static h-screen md:h-auto bg-black md:bg-transparent top-0 -left-full md:top-auto md:left-auto w-full md:w-auto inline-flex flex-col items-center justify-center md:flex-row flex-wrap space-x-0 md:space-x-4 space-y-4 md:space-y-0"
+  >
     <li>
       <a href="#a" className="menu-btn">
         Trang chủ
-      </a>
-    </li>
-    <li>
-      <a href="#a" className="menu-btn">
-        Sản phẩm
       </a>
     </li>
     <li>
@@ -124,10 +119,15 @@ const generateNavList = () => (
       </a>
     </li>
     <li>
-      <a href="/login" className="menu-btn">
-        Đăng nhập
+      <a href="#a" className="menu-btn">
+        Giới thiệu
       </a>
     </li>
+    {/* <li>
+      <a href="/login" className="menu-btn">
+        Login
+      </a>
+    </li> */}
   </NavLink>
 );
 
@@ -147,6 +147,7 @@ const handleDrawerToggle = (e) => {
 
 const Nav = (props) => {
   const { fixed, className } = props;
+  console.log(props);
   // const navClass = `tracking-wider ${
   //   color === 'transparent' ? 'bg-transparent text-white' : 'bg-white shadow-xl bg-opacity-75'
   // }`;
@@ -159,8 +160,9 @@ const Nav = (props) => {
       }
     }
     function handleWindowScroll() {
-      if (window.scrollY > 20) document.body.getElementsByTagName('nav')[0].classList.add('fixed');
-      else document.body.getElementsByTagName('nav')[0].classList.remove('fixed');
+      if (!fixed) return;
+      if (window.scrollY > 20) document.body.getElementsByTagName('nav')[0].classList.add('sticky');
+      else document.body.getElementsByTagName('nav')[0].classList.remove('sticky');
     }
 
     window.addEventListener('scroll', handleWindowScroll);
@@ -183,7 +185,7 @@ const Nav = (props) => {
         </div>
 
         {/* Navigation List Link */}
-        <div className="md:inline-block text">{generateNavList()}</div>
+        <div className="md:inline-block text">{generateNavList(props)}</div>
 
         {/* Navigation Menu */}
         <div className="inline-block md:hidden">
@@ -204,6 +206,8 @@ const Nav = (props) => {
 Nav.propTypes = {
   className: PropTypes.string,
   textColor: PropTypes.string,
+  textColorHover: PropTypes.string,
+  textColorFixedHover: PropTypes.string,
   color: PropTypes.string,
   background: PropTypes.string,
   blur: PropTypes.string,
@@ -214,13 +218,15 @@ Nav.propTypes = {
 };
 
 Nav.defaultProps = {
-  className: 'PropTypes.string',
+  className: '',
   color: '#fff',
   fixedColor: '#fff',
   fixed: false,
   opacity: 1,
   background: 'transparent',
   fixedBackground: 'white',
+  textColorHover: 'crimson',
+  textColorFixedHover: '#fff',
 };
 
 export default Nav;
