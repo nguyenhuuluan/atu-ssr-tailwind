@@ -42,32 +42,38 @@ const Home = () => (
       </button>
     </Section>
 
-    <Section className="index-info bg-gray-700">
+    <Section className="index-info bg-gray-700" style={{
+        // background-color: red;
+        backgroundImage: 'url(/img/tmp.PNG)',
+        backgroundRepeat: 'repeat',
+      }}>
       <Title color="white">Best Order</Title>
 
-      <div className="order-list">
-        <div className="order-item flex flex-col items-center justify-center bg-red-300">
-          <p className="bg-white w-full">Phở cuốn</p>
-          <img className="rounded-l shadow-xl w-16" alt="logo" src="/img/ganhdau/bua-an-gia-dinh.jpg" />
-          <div className="item-info flex inline-flex bg-yellow-700 items-stretch justify-center text-white">
-            <p className="item-price w-6/12 border-r-2 py-auto flex items-center justify-center">39,000</p>
-            <p className="w-6/12">Đặc sản Gánh Đậu</p>
+      <div className="order-list grid gap-4 mt-8 grid-cols-layout">
+        {[1, 2, 3, 4, 1, 2, 3, 4].map((i) => (
+          <div key={i} className="order-item flex flex-col items-center h-full bg-gray-100 pb-4">
+            <p className="bg-yellow-500 w-full h-12 flex items-center justify-center">Phở cuốn</p>
+            <img className="rounded-l shadow-xl w-full" alt="logo" src="/img/ganhdau/bua-an-gia-dinh.jpg" />
+            <div className="item-info flex inline-flex w-full bg-yellow-400 items-stretch justify-center text-white" style={{minHeight: '2.5rem'}}>
+              <p className="item-price w-6/12 border-r-2 py-auto flex items-center justify-center">39,000</p>
+              <p className="w-6/12 flex items-center justify-center">Đặc sản Gánh Đậu</p>
+            </div>
+            <p className="text-justify m-4">Bánh phở lá, thịt thăn bò, rau sà lách, tía tô, diếp cá, nước mắm chua ngọt</p>
           </div>
-          <p>Bánh phở lá, thịt thăn bò, rau sà lách, tía tô, diếp cá, nước mắm chua ngọt</p>
-        </div>
+        ))}
       </div>
     </Section>
 
     <Section
       className="index-story inline-flex flex-col md:flex-row"
-      style={{
-        // background-color: red;
-        backgroundImage: 'url(/img/tmp.PNG)',
-        backgroundRepeat: 'repeat',
-      }}
+      // style={{
+      //   // background-color: red;
+      //   backgroundImage: 'url(/img/tmp.PNG)',
+      //   backgroundRepeat: 'repeat',
+      // }}
     >
       <div className="story-image md:w-6/12 p-4">
-        <img className="rounded-l shadow-xl" alt="logo" src="/img/ganhdau/bua-an-gia-dinh.jpg" />
+        <img className="rounded-lg shadow-2xl" alt="logo" src="/img/ganhdau/bua-an-gia-dinh.jpg" />
       </div>
 
       <div className="story-content md:w-6/12 p-4">
