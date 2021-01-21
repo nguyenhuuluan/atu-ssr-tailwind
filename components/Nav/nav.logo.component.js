@@ -6,7 +6,7 @@ const NavLogo = () => (
   >
     <li id="nav-logo" className="inline-flex items-center">
       <a href="#logo" className="inline-flex">
-        <img alt="logo" src="/img/ganhdau.png" style={{ height: '41px' }} />
+        <img alt="logo" src="/img/ganhdau.png" style={{ maxHeight: '56px' }} />
         {/* <img alt="logo" src="/img/ganhdau.png" style={{ height: '41px', width: '41px' }} /> */}
         {/* <span className="pl-2">Creative Atu</span> */}
       </a>

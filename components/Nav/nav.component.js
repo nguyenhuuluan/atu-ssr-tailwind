@@ -18,7 +18,7 @@ const NavBar = styled.nav`
   width: 100%;
   position: ${({ fixed }) => (fixed ? 'fixed' : 'absolute')};
   z-index: 100;
-  padding: 0.5em 1.5em 0.5em 1.5em;
+  padding: 0 1.5em 0 1.5em;
   padding-bottom: ${({ background }) => (background !== 'transparent' ? 0 : '1.5em')};
   box-shadow: ${({ background }) =>
     background !== 'transparent' ? '0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)' : 'none'};
@@ -28,7 +28,7 @@ const NavBar = styled.nav`
 
   &.sticky {
     position: fixed;
-    padding-bottom: 0.5em;
+    padding-bottom: 0;
     background: ${({ fixedBackground }) => fixedBackground};
     opacity: ${({ opacity }) => opacity};
     backdrop-filter: ${({ blur }) => (blur ? `blur(${blur})` : 'none')};
@@ -185,7 +185,7 @@ const Nav = (props) => {
         </div>
 
         {/* Navigation List Link */}
-        <div className="md:inline-block text">{generateNavList(props)}</div>
+        <div className="md:inline-block my-2">{generateNavList(props)}</div>
 
         {/* Navigation Menu */}
         <div className="inline-block md:hidden">

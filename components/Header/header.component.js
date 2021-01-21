@@ -1,3 +1,4 @@
+import NavLogo from '../Nav/nav.logo.component';
 import TypedComponent from '../Typed/typed.component';
 
 const { default: Nav } = require('../Nav/nav.component');
