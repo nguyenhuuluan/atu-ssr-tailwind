@@ -15,7 +15,8 @@ module.exports = {
 
         // Complex site-specific row configuration
 
-        layout: 'repeat(auto-fit, minmax(300px, 1fr))',
+        // card: 'repeat(auto-fit, minmax(200px, 250px))',
+        card: 'repeat(auto-fit, minmax(250px, 1fr))',
       },
     },
   },
