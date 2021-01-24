@@ -131,7 +131,7 @@ const Home = () => (
         backgroundRepeat: 'repeat',
       }}
     >
-      <Title className="whitespace-nowrap">__Best Order__</Title>
+      <Title>__Best Order__</Title>
       <div className="order-list grid gap-4 mt-8 grid-cols-card">
         {products.map((item) => (
           <ProductCard {...item} />
@@ -152,7 +152,7 @@ const Home = () => (
       </div>
 
       <div className="story-content md:w-6/12 p-4">
-        <Title className="whitespace-nowrap">~~Our Story~~</Title>
+        <Title>~~Our Story~~</Title>
         <div className="mt-4 text-justify">
           <p className="text-2xl my-4 text-yellow-400 text-center">Có một chàng trai đam mê ẩm thực truyền thống</p>
           <p>

@@ -32,10 +32,26 @@ const NavBar = styled.nav`
     background: ${({ fixedBackground }) => fixedBackground};
     opacity: ${({ opacity }) => opacity};
     backdrop-filter: ${({ blur }) => (blur ? `blur(${blur})` : 'none')};
-    & .nav-link-list li a:hover {
+    & .nav-link-list li:hover {
+      background-color: rgba(209, 213, 219, 0.1);
       color: #fff;
       color: ${({ textColorFixedHover }) => textColorFixedHover};
     }
+  }
+
+  & .nav-link-list li.active {
+    color: ${({ textColorFixedHover }) => textColorFixedHover};
+  }
+
+  & #marker {
+    position: absolute;
+    height: 4px;
+    /* left:10: */
+    width: 0;
+    background: ${({ textColorFixedHover }) => textColorFixedHover};
+    bottom: -8px;
+    transition: 0.5s;
+    border-radius: 4px;
   }
 `;
 
@@ -58,6 +74,7 @@ const ToggleLabel = styled.label`
       transform 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96);
 
     &.line-top {
+      left: 0;
       margin-top: -3px;
       &.active {
         margin-top: 0;
@@ -68,6 +85,7 @@ const ToggleLabel = styled.label`
     }
 
     &.line-bottom {
+      left: 0;
       margin-top: 3px;
       &.active {
         margin-top: 0;
@@ -81,20 +99,23 @@ const ToggleLabel = styled.label`
 const NavLink = styled.ul`
   /* display: inline-block; */
   /* list-style: none; */
-  transition: all 0.2s ease-out;
+  transition: all 0.3s ease-out;
+
+  & li {
+    position: fixed
+    transition: color 0.2s ease-out;
+    /* padding: 0.5rem; */
+    border-radius: 0.5rem;
+
+  }
 
   &.active {
     left: 0;
-  }
-  & li {
-  }
-
-  & a {
-    display: block;
-    transition: color 0.3s ease;
-
-    :hover {
-      color: ${({ textColorHover }) => textColorHover};
+    & li {
+      visibility: visible;
+      transform: translateX(0px);
+      transition: transform 0.3192s ease-out calc(0.1596s * var(--i)),
+        visibility 0.3192s ease-out calc(0.1596s * var(--i));
     }
   }
 
@@ -106,19 +127,35 @@ const NavLink = styled.ul`
 const generateNavList = (props) => (
   <NavLink
     textColorHover={props.textColorHover}
-    className="nav-link-list fixed md:static h-screen md:h-auto bg-black md:bg-transparent top-0 -left-full md:top-auto md:left-auto w-full md:w-auto inline-flex flex-col items-center justify-center md:flex-row flex-wrap space-x-0 md:space-x-4 space-y-4 md:space-y-0"
+    className="nav-link-list fixed uppercase md:relative h-screen md:h-auto bg-black md:bg-transparent top-0 -left-full md:top-auto md:left-auto w-full md:w-auto inline-flex flex-col items-center justify-center md:flex-row flex-wrap space-x-0 md:space-x-4 space-y-4 md:space-y-0"
   >
-    <li>
-      <a href="#a" className="menu-btn">
-        Trang chủ
+    <div id="marker" className="absolute" />
+    <li
+      // onMouseOver={navLinkHover}
+      // onMouseLeave={navLinkMoveOut}
+      className="nav-link active transform md:transform-none invisible md:visible -translate-x-full md:translate-x-0"
+      style={{ '--i': 1 }}
+    >
+      <a href="#a" className="menu-btn ">
+        Trang chủ
       </a>
     </li>
-    <li>
+    <li
+      // onMouseOver={navLinkHover}
+      // onMouseLeave={navLinkMoveOut}
+      className="nav-link transform md:transform-none invisible md:visible -translate-x-full md:translate-x-0"
+      style={{ '--i': 2 }}
+    >
       <a href="#a" className="menu-btn">
-        Liên hệ
+        Liên hệ
       </a>
     </li>
-    <li>
+    <li
+      // onMouseOver={navLinkHover}
+      // onMouseLeave={navLinkMoveOut}
+      className="nav-link transform md:transform-none invisible md:visible -translate-x-full md:translate-x-0"
+      style={{ '--i': 3 }}
+    >
       <a href="#a" className="menu-btn">
         Giới thiệu
       </a>
@@ -152,6 +189,16 @@ const Nav = (props) => {
   //   color === 'transparent' ? 'bg-transparent text-white' : 'bg-white shadow-xl bg-opacity-75'
   // }`;
   useEffect(() => {
+    const marker = document.querySelector('#marker');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinkActive = document.querySelector('.nav-link.active');
+
+    function movingNavLinkUnderline(left, width, opacity) {
+      marker.style.left = `${left}px`;
+      marker.style.width = `${width}px`;
+      marker.style.opacity = opacity;
+    }
+
     function handleMobileResize() {
       const ele = document.body.getElementsByClassName('is-mobile')[0];
       if (window.innerWidth > 768 && ele.checked) {
@@ -165,12 +212,28 @@ const Nav = (props) => {
       else document.body.getElementsByTagName('nav')[0].classList.remove('sticky');
     }
 
+    function indicator(e) {
+      switch (e?.type) {
+        case 'mouseover':
+          movingNavLinkUnderline(e.target.offsetLeft, e.target.offsetWidth, 1);
+          break;
+        default:
+          if (navLinkActive) movingNavLinkUnderline(navLinkActive.offsetLeft, navLinkActive.offsetWidth, 1);
+          else movingNavLinkUnderline(0, 0, 0);
+      }
+    }
+
+    indicator();
+    navLinks.forEach((link) => link.addEventListener('mouseover', indicator));
+    navLinks.forEach((link) => link.addEventListener('mouseleave', indicator));
     window.addEventListener('scroll', handleWindowScroll);
     window.addEventListener('resize', handleMobileResize);
-    handleMobileResize();
+    // handleHoverNavLink();
     return () => {
       window.removeEventListener('resize', handleMobileResize);
       window.removeEventListener('scroll', handleWindowScroll);
+      navLinks.forEach((link) => link.removeEventListener('mouseover', indicator));
+      navLinks.forEach((link) => link.removeEventListener('mouseleave', indicator));
     };
   }, []);
 
@@ -188,7 +251,7 @@ const Nav = (props) => {
         <div className="md:inline-block my-2">{generateNavList(props)}</div>
 
         {/* Navigation Menu */}
-        <div className="inline-block md:hidden">
+        <div className="inline-block relative md:hidden">
           <div className="flex md:hidden">
             <ToggleLabel htmlFor="is-mobile" onClick={handleDrawerToggle}>
               <Input type="checkbox" id="is-mobile" className="is-mobile" />
