@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import NavLogo from './nav.logo.component';
+import ActiveLink from './active.link.component';
+import { PAGES } from '../../utils/constants';
 
 const Input = styled.input`
   display: none;
@@ -102,11 +104,9 @@ const NavLink = styled.ul`
   transition: all 0.3s ease-out;
 
   & li {
-    position: fixed
     transition: color 0.2s ease-out;
     /* padding: 0.5rem; */
     border-radius: 0.5rem;
-
   }
 
   &.active {
@@ -124,49 +124,46 @@ const NavLink = styled.ul`
   } */
 `;
 
-const generateNavList = (props) => (
-  <NavLink
-    textColorHover={props.textColorHover}
-    className="nav-link-list fixed uppercase md:relative h-screen md:h-auto bg-black md:bg-transparent top-0 -left-full md:top-auto md:left-auto w-full md:w-auto inline-flex flex-col items-center justify-center md:flex-row flex-wrap space-x-0 md:space-x-4 space-y-4 md:space-y-0"
-  >
-    <div id="marker" className="absolute" />
-    <li
-      // onMouseOver={navLinkHover}
-      // onMouseLeave={navLinkMoveOut}
-      className="nav-link active transform md:transform-none invisible md:visible -translate-x-full md:translate-x-0"
-      style={{ '--i': 1 }}
+const generateNavList = (props) => {
+  const linkClassName = 'nav-link transform md:transform-none invisible md:visible -translate-x-full md:translate-x-0';
+
+  return (
+    <NavLink
+      textColorHover={props.textColorHover}
+      className="nav-link-list fixed uppercase md:relative h-screen md:h-auto bg-black md:bg-transparent top-0 -left-full md:top-auto md:left-auto w-full md:w-auto inline-flex flex-col items-center justify-center md:flex-row flex-wrap space-x-0 md:space-x-4 space-y-4 md:space-y-0 cursor-pointer"
     >
-      <a href="#a" className="menu-btn ">
-        Trang chủ
-      </a>
-    </li>
-    <li
-      // onMouseOver={navLinkHover}
-      // onMouseLeave={navLinkMoveOut}
-      className="nav-link transform md:transform-none invisible md:visible -translate-x-full md:translate-x-0"
-      style={{ '--i': 2 }}
-    >
-      <a href="#a" className="menu-btn">
-        Liên hệ
-      </a>
-    </li>
-    <li
-      // onMouseOver={navLinkHover}
-      // onMouseLeave={navLinkMoveOut}
-      className="nav-link transform md:transform-none invisible md:visible -translate-x-full md:translate-x-0"
-      style={{ '--i': 3 }}
-    >
-      <a href="#a" className="menu-btn">
-        Giới thiệu
-      </a>
-    </li>
-    {/* <li>
-      <a href="/login" className="menu-btn">
-        Login
-      </a>
-    </li> */}
-  </NavLink>
-);
+      <div id="marker" className="absolute" />
+      {PAGES.map((page, index) => (
+        <ActiveLink key={index} activeClassName="active" href={page.href} as={page.as}>
+          <li className={linkClassName} style={{ '--i': index }}>
+            {page.title}
+          </li>
+        </ActiveLink>
+      ))}
+      {/* <ActiveLink activeClassName="active" href="/">
+        <li className={linkClassName} style={{ '--i': 1 }}>
+          Trang chủ
+        </li>
+      </ActiveLink>
+      <ActiveLink activeClassName="active" href="/contact">
+        <li className={linkClassName} style={{ '--i': 2 }}>
+          Liên hệ
+        </li>
+      </ActiveLink>
+      <ActiveLink activeClassName="active" href="/about">
+        <li className={linkClassName} style={{ '--i': 3 }}>
+          Giới thiệu
+        </li>
+      </ActiveLink> */}
+
+      {/* <li>
+        <a href="/login" className="menu-btn">
+          Login
+        </a>
+      </li> */}
+    </NavLink>
+  );
+};
 
 const handleDrawerToggle = (e) => {
   if (e.target.checked) {

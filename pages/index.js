@@ -175,8 +175,8 @@ const Home = () => (
     >
       <Title underscore>Chuẩn Combo Gia Đình mang về...</Title>
       <div className="order-list grid gap-4 mt-8 grid-cols-card">
-        {products.map((item) => (
-          <ProductCard {...item} />
+        {products.map((item, index) => (
+          <ProductCard key={index} {...item} />
         ))}
       </div>
     </Section>

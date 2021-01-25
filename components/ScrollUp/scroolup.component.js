@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
+import { COLORS } from '../../utils/constants';
 
 const ScroolUp = styled.div`
   position: fixed;
   height: 45px;
   width: 42px;
-  background: crimson;
+  background: ${COLORS.PRIMARY};
   right: 30px;
   bottom: 10px;
   text-align: center;
@@ -37,7 +38,6 @@ const ScrollUpButton = () => {
       else document.body.getElementsByClassName('scroll-up-btn')[0].classList.remove('show');
     }
     window.addEventListener('scroll', handleMobileResize);
-    handleMobileResize();
 
     return () => window.removeEventListener('scroll', handleMobileResize);
   }, []);
