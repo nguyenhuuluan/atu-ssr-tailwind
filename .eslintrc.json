@@ -30,7 +30,15 @@
   },
   "plugins": [],
   "rules": {
-    "linebreak-style": ["error", "windows"],
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": ["_id"]
+      }
+    ],
+    "import/no-unresolved": "off",
+    "import/prefer-default-export": "off",
+    "linebreak-style": ["error", "unix"],
     "react/jsx-one-expression-per-line": [0, { "allow": "single-child" }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prop-types": 0,

@@ -175,26 +175,26 @@ const ContactPage = () => (
         <ul className="info">
           <li>
             <span>
-              <i className="far fa-clock" />
+              <i className="far fa-clock" aria-hidden />
             </span>
             <span>10:00 - 22:00</span>
           </li>
           <li>
             <span>
-              <i className="far fa-envelope" />
+              <i className="far fa-envelope" aria-hidden />
             </span>
             <span>wecare.ganhdau@gmail.com</span>
           </li>
           <li>
             <span>
-              <i className="fas fa-phone-alt" />
+              <i className="fas fa-phone-alt" aria-hidden />
             </span>
             <span>028 668 33331</span>
           </li>
 
           <li>
             <span>
-              <i className="fas fa-map-marker-alt" />
+              <i className="fas fa-map-marker-alt" aria-hidden />
             </span>
             <span>
               119B Nguyễn Văn Quá <br />
@@ -207,12 +207,12 @@ const ContactPage = () => (
         <ul className="sci space-x-4">
           <li>
             <a href="#a">
-              <i className="fab fa-facebook-square" />
+              <i className="fab fa-facebook-square" aria-hidden />
             </a>
           </li>
           <li>
             <a href="#a">
-              <i className="fab fa-instagram" />
+              <i className="fab fa-instagram" aria-hidden />
             </a>
           </li>
         </ul>
