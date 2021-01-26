@@ -10,12 +10,6 @@ const Section = styled.section`
   min-height: 100vh;
   background-color: none;
 
-  & .container {
-    /* margin: 2rem; */
-    height: 80vh;
-    padding: var(--padding);
-  }
-
   & h1 {
     color: white;
     font-size: 2rem;
@@ -45,13 +39,12 @@ const Section = styled.section`
       }
       &:hover {
         opacity: 1;
-        transform: translateX(1rem) scale(1.1);
+        transform: translateX(1.5rem) scale(1.1);
       }
     }
   }
 
   & .contact-info {
-    top: 40px;
     background: #e66813;
     padding: 1rem;
     display: flex;
@@ -62,25 +55,45 @@ const Section = styled.section`
     z-index: 2;
   }
   & .contact-form {
-    position: absolute;
-    width: 100%;
-    height: calc(100% - 80px);
-    right: 0;
-    flex: 1;
-    z-index: 1;
+    background: #d2d2c2;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 0.75rem;
+    & h1 {
+      color: #e66813;
+    }
+
+    & input[type='submit'] {
+      background: #e66813;
+      opacity: 1;
+      color: white;
+      transition: 0.1s ease-in;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+      &:focus {
+        opacity: 0.7;
+        border: 1px solid #555;
+        border-radius: 4px;
+      }
+    }
 
     & .formBox {
       /* background-color: #e5e7eb; */
       /* margin-left: 5rem; */
-      position: absolute;
+      /* position: absolute;
       top: 0;
       right: 0;
       width: calc(100% - 2 * var(--margin) - 2 * var(--padding));
       height: 100%;
       padding: var(--padding);
+      background: #d2d2c2;
+      box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 0.75rem;
+      text-align: center; */
 
-      text-align: center;
-      ::before {
+      /* ::before {
         content: '';
         position: absolute;
         top: 0;
@@ -91,7 +104,7 @@ const Section = styled.section`
         box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
         border-radius: 0.75rem;
         z-index: -1;
-      }
+      } */
     }
   }
 
@@ -99,9 +112,7 @@ const Section = styled.section`
     display: flex;
     color: #fff;
     flex-direction: row;
-    --tw-space-x-reverse: 0;
     margin: 0 auto 2rem auto;
-    /* margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse))); */
     font-size: 2.5rem;
     line-height: 2rem;
 
@@ -117,6 +128,7 @@ const Section = styled.section`
   & .inputBox {
     position: relative;
     margin-bottom: 1.5rem;
+    padding-right: 1rem;
 
     & input,
     textarea {
@@ -146,7 +158,6 @@ const Section = styled.section`
     & span {
       position: absolute;
       left: 0;
-      /* padding: 5px 0; */
       font-weight: 300;
       color: #333;
       pointer-events: none;
@@ -157,8 +168,9 @@ const Section = styled.section`
 
 const ContactPage = () => (
   <Section>
-    <div className="container relative flex items-center flex-col md:flex-row">
-      <div className="contact-info">
+    <div className="p-4 grid gap-y-4 md:gap-0  md:auto-rows-contact contact-card grid-cols-6">
+      {/* <div className="container2 relative flex items-center flex-col md:flex-row"> */}
+      <div className="contact-info col-start-2 col-end-6 md:col-start-1 md:col-end-3 md:row-start-2 md:row-end-4">
         <h1 className="text-center">Contact Info</h1>
         <ul className="info">
           <li>
@@ -205,10 +217,10 @@ const ContactPage = () => (
           </li>
         </ul>
       </div>
-      <div className="contact-form flex-1 ">
+      <div className="contact-form bg-gray-300 flex-1 col-start-1 col-end-7 md:col-start-2 md:col-end-7 md:row-start-1 md:row-end-5">
         <div className="formBox">
-          <h1>Send a message</h1>
-          <div className="w-3/4 p-4 float-right  flex relative justify-between flex-wrap">
+          <h1 className="text-center">Send a message</h1>
+          <div className="md:w-3/4 p-4 float-right  flex relative justify-between flex-wrap">
             <div className="inputBox w-6/12">
               <input className="w-full" type="text" name="" required />
               <span>First Name</span>

@@ -18,6 +18,9 @@ module.exports = {
         // card: 'repeat(auto-fit, minmax(200px, 250px))',
         card: 'repeat(auto-fit, minmax(250px, 1fr))',
       },
+      gridAutoRows: {
+        contact: 'minmax(4rem, min-content)',
+      },
     },
   },
   variants: {
