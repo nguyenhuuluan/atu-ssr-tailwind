@@ -8,15 +8,20 @@
     "start": "next start"
   },
   "dependencies": {
+    "@hapi/iron": "^6.0.0",
     "@types/next": "^9.0.0",
     "autoprefixer": "^10.2.1",
     "classnames": "^2.2.6",
+    "cookie": "^0.4.1",
     "next": "10.0.5",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "postcss": "^8.2.4",
     "prop-types": "^15.7.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "styled-components": "^5.2.1",
+    "swr": "^0.4.1",
     "tailwindcss": "^2.0.2",
     "typed.js": "^2.0.11"
   },
