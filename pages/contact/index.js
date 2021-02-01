@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import withWebAppLayout from '../../components/Layout/webapp.layout';
-import { COLORS } from '../../utils/constants';
 
 const Section = styled.section`
   --padding: 1rem;
