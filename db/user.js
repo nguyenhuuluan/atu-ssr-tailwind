@@ -9,6 +9,7 @@ import { nanoid } from 'nanoid';
 const users = [];
 
 export async function createUser({ username, password }) {
+  console.log('[createUser]: ', users, { username, password });
   // Here you should create the user and save the salt and hashed password (some dbs may have
   // authentication methods that will do it for you so you don't have to worry about it):
   const salt = crypto.randomBytes(16).toString('hex');
@@ -30,6 +31,8 @@ export async function createUser({ username, password }) {
 
 // Here you should lookup for the user in your DB
 export async function findUser({ username }) {
+  console.log('[findUser]: ', users, username);
+
   // This is an in memory store for users, there is no data persistence without a proper DB
   return users.find((user) => user.username === username);
 }
@@ -37,6 +40,8 @@ export async function findUser({ username }) {
 // Compare the password of an already fetched user (using `findUser`) and compare the
 // password for a potential match
 export function validatePassword(user, inputPassword) {
+  console.log('[validatePassword]: ', users, user, inputPassword);
+
   const inputHash = crypto.pbkdf2Sync(inputPassword, user.salt, 1000, 64, 'sha512').toString('hex');
   const passwordMatch = user.hash === inputHash;
   return passwordMatch;

@@ -43,7 +43,6 @@
         "aspects": ["noHref", "invalidHref", "preferButton"]
       }
     ],
-    "implicit-arrow-linebreak": ["error", "below"],
     "react/jsx-props-no-spreading": [
       2,
       {
