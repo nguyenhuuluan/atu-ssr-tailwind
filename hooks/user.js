@@ -4,12 +4,15 @@ import useSWR from 'swr';
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export default function useUser({ redirectTo, redirectIfFound } = {}) {
-  const { data, error } = useSWR('/api/user', fetcher);
+const useUser = ({ redirectTo, redirectIfFound } = {}) => {
+  const { data, error, mutate } = useSWR('/api/user', fetcher);
   console.log('[useUser] ', data, error);
+  const loading = !data;
   const user = data?.user;
   const finished = Boolean(data);
   const hasUser = Boolean(user);
+
+  console.log(loading, user, finished, hasUser);
 
   useEffect(() => {
     if (!redirectTo || !finished) return;
@@ -23,5 +26,9 @@ export default function useUser({ redirectTo, redirectIfFound } = {}) {
     }
   }, [redirectTo, redirectIfFound, finished, hasUser]);
 
-  return error ? null : user;
-}
+  // return [error ? null : user];
+
+  return [user, { mutate, loading }];
+};
+
+export default useUser;

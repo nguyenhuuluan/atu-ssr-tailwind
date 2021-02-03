@@ -8,7 +8,7 @@ import { nanoid } from 'nanoid';
 
 const users = [];
 
-export async function createUser({ username, password }) {
+export async function createUser({ username, password, name }) {
   console.log('[createUser]: ', users, { username, password });
   // Here you should create the user and save the salt and hashed password (some dbs may have
   // authentication methods that will do it for you so you don't have to worry about it):
@@ -19,7 +19,7 @@ export async function createUser({ username, password }) {
     id: nanoid(12),
     createAt: Date.now(),
     username,
-    password,
+    name,
     hash,
     salt,
   };
@@ -35,6 +35,19 @@ export async function findUser({ username }) {
 
   // This is an in memory store for users, there is no data persistence without a proper DB
   return users.find((user) => user.username === username);
+}
+
+export async function deleteUser({ username }) {
+  console.log('[deleteUser]: ', users, username);
+  const user = await findUser(username);
+  console.log(user);
+  users.splice(users.indexOf(user), 1);
+  console.log(users);
+}
+
+export async function getAllUsers() {
+  // For demo purpose only. You are not likely to have to return all users.
+  return users;
 }
 
 // Compare the password of an already fetched user (using `findUser`) and compare the

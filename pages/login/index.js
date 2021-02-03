@@ -3,7 +3,7 @@ import Router, { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 import Nav from '../../components/Nav/nav.component';
-import style from './index.module.scss';
+import useUser from '../../hooks/user';
 
 const Body = styled.div`
   position: relative;
@@ -32,7 +32,8 @@ const Body = styled.div`
   & .submit {
     display: flex;
     flex-direction: column;
-    & > button {
+
+    & > button[type='submit'] {
       margin-right: 0 0.5rem;
       padding: 0.5rem 1rem;
       cursor: pointer;
@@ -93,19 +94,17 @@ const Body = styled.div`
 `;
 
 const LoginPage = (props) => {
-  const { isLogin } = props;
   const [errorMsg, setErrorMsg] = useState('s');
+  const [isSignup, setIsSignup] = useState(false);
+  const [user, { mutate }] = useUser({ redirectTo: '/about', redirectIfFound: true });
 
-  async function handleSubmit(e) {
+  async function handleSignUp(e) {
     e.preventDefault();
+    setIsSignup(!isSignup);
+  }
 
-    if (errorMsg) setErrorMsg('');
-
-    const body = {
-      username: e.currentTarget.username.value,
-      password: e.currentTarget.password.value,
-    };
-
+  const handleLogin = async (body) => {
+    console.log('handleLogin', body);
     try {
       const res = await fetch('/api/login', {
         method: 'POST',
@@ -118,6 +117,47 @@ const LoginPage = (props) => {
     } catch (error) {
       console.error('An unexpected error happened occurred:', error);
       setErrorMsg(error.message);
+    }
+  };
+
+  const handleSignup = async (body) => {
+    console.log('handleSignup', body);
+    try {
+      if (errorMsg) setErrorMsg('');
+
+      const res = await fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+
+      if (res.status === 201) {
+        const userObj = await res.json();
+        // set user to useSWR state
+        mutate(userObj);
+      } else setErrorMsg(await res.text());
+    } catch (error) {
+      console.error('An unexpected error happened occurred:', error);
+      setErrorMsg(error.message);
+    }
+  };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (errorMsg) setErrorMsg('');
+
+    let body = {
+      username: e.currentTarget.username.value,
+      password: e.currentTarget.password.value,
+    };
+    // console.log(body);
+
+    if (isSignup) {
+      body = { ...body, name: e.currentTarget.name.value };
+      await handleSignup(body);
+    } else {
+      await handleLogin(body);
     }
   }
 
@@ -141,6 +181,10 @@ const LoginPage = (props) => {
         <form className="flex flex-col bg-gray-600 p-4" onSubmit={handleSubmit}>
           <h1>Body will be here</h1>
 
+          <div className="inputBox" hidden={!isSignup}>
+            <input type="text" name="name" required={isSignup} />
+            <span>Full Name</span>
+          </div>
           <div className="inputBox">
             <input type="text" name="username" required />
             <span>Username</span>
@@ -149,13 +193,12 @@ const LoginPage = (props) => {
             <input type="password" name="password" required />
             <span>Password</span>
           </div>
-
           <div className="submit">
-            <Link href="/signup" className="no-underline">
+            <button type="button" className="focus:outline-none w-max p-2 text-left" onClick={handleSignUp}>
               I don't have an account
-            </Link>
+            </button>
             <button type="submit" className="text-center">
-              Login
+              {isSignup ? 'Signup' : 'Login'}
             </button>
           </div>
 

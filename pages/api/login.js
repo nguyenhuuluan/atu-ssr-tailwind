@@ -42,7 +42,7 @@ handler.use(auth);
 // });
 
 handler.post(myPassport.authenticate('local'), (req, res) => {
-  console.log('[api] login [post]', req);
+  console.log('[api] login [post]');
   res.json({ user: extractUser(req.user) });
 });
 

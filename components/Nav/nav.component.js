@@ -181,7 +181,7 @@ const handleDrawerToggle = (e) => {
 
 const Nav = (props) => {
   const { fixed, className } = props;
-  console.log(props);
+  // console.log(props);
   // const navClass = `tracking-wider ${
   //   color === 'transparent' ? 'bg-transparent text-white' : 'bg-white shadow-xl bg-opacity-75'
   // }`;

@@ -1,4 +1,5 @@
 import nextConnect from 'next-connect';
+import { deleteUser } from '../../db';
 import auth from '../../middleware/auth';
 
 const handler = nextConnect();
@@ -10,6 +11,7 @@ handler
     // because it may contain sensitive field such as !!password!! Only return what needed
     // const { name, username, favoriteColor } = req.user
     // res.json({ user: { name, username, favoriteColor } })
+    console.log('[api] user-get', req.user);
     res.json({ user: req.user });
   })
   .use((req, res, next) => {
@@ -18,13 +20,15 @@ handler
     if (!req.user) res.status(401).send('unauthenticated');
     else next();
   })
-  .put((req, res) => {
-    const { name } = req.body;
-    const user = updateUserByUsername(req, req.user.username, { name });
-    res.json({ user });
-  })
+  //   .put((req, res) => {
+  //     console.log('[api] user-put', req);
+  //     const { name } = req.body;
+  //     const user = updateUserByUsername(req, req.user.username, { name });
+  //     res.json({ user });
+  //   })
   .delete((req, res) => {
-    deleteUser(req);
+    console.log('[api] user-delete', req.user);
+    deleteUser(req.user.username);
     req.logOut();
     res.status(204).end();
   });
