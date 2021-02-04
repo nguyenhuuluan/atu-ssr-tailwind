@@ -134,6 +134,7 @@ const LoginPage = (props) => {
       if (res.status === 201) {
         const userObj = await res.json();
         // set user to useSWR state
+        console.log(userObj);
         mutate(userObj);
       } else setErrorMsg(await res.text());
     } catch (error) {
@@ -216,7 +217,7 @@ const LoginPage = (props) => {
 
   return (
     <>
-      {loginHeader()}
+      {/* {loginHeader()} */}
       {loginBody()}
       {loginFooter()}
     </>
