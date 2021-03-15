@@ -96,85 +96,71 @@ const Body = styled.div`
 const LoginPage = (props) => {
   const [errorMsg, setErrorMsg] = useState('s');
   const [isSignup, setIsSignup] = useState(false);
-  const [user, { mutate }] = useUser({ redirectTo: '/about', redirectIfFound: true });
+  // const [user, { mutate }] = useUser({ redirectTo: '/about', redirectIfFound: true });
 
   async function handleSignUp(e) {
     e.preventDefault();
-    setIsSignup(!isSignup);
+    // setIsSignup(!isSignup);
   }
 
   const handleLogin = async (body) => {
     console.log('handleLogin', body);
-    try {
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
+    // try {
+    //   const res = await fetch('/api/login', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(body),
+    //   });
 
-      if (res.status === 200) Router.push('/about');
-      else throw new Error(await res.text());
-    } catch (error) {
-      console.error('An unexpected error happened occurred:', error);
-      setErrorMsg(error.message);
-    }
+    //   if (res.status === 200) Router.push('/about');
+    //   else throw new Error(await res.text());
+    // } catch (error) {
+    //   console.error('An unexpected error happened occurred:', error);
+    //   setErrorMsg(error.message);
+    // }
   };
 
   const handleSignup = async (body) => {
     console.log('handleSignup', body);
-    try {
-      if (errorMsg) setErrorMsg('');
+    // try {
+    //   if (errorMsg) setErrorMsg('');
 
-      const res = await fetch('/api/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
+    //   const res = await fetch('/api/users', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(body),
+    //   });
 
-      if (res.status === 201) {
-        const userObj = await res.json();
-        // set user to useSWR state
-        console.log(userObj);
-        mutate(userObj);
-      } else setErrorMsg(await res.text());
-    } catch (error) {
-      console.error('An unexpected error happened occurred:', error);
-      setErrorMsg(error.message);
-    }
+    //   if (res.status === 201) {
+    //     const userObj = await res.json();
+    //     // set user to useSWR state
+    //     console.log(userObj);
+    //     mutate(userObj);
+    //   } else setErrorMsg(await res.text());
+    // } catch (error) {
+    //   console.error('An unexpected error happened occurred:', error);
+    //   setErrorMsg(error.message);
+    // }
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (errorMsg) setErrorMsg('');
+    // if (errorMsg) setErrorMsg('');
 
-    let body = {
-      username: e.currentTarget.username.value,
-      password: e.currentTarget.password.value,
-    };
-    // console.log(body);
+    // let body = {
+    //   username: e.currentTarget.username.value,
+    //   password: e.currentTarget.password.value,
+    // };
+    // // console.log(body);
 
-    if (isSignup) {
-      body = { ...body, name: e.currentTarget.name.value };
-      await handleSignup(body);
-    } else {
-      await handleLogin(body);
-    }
+    // if (isSignup) {
+    //   body = { ...body, name: e.currentTarget.name.value };
+    //   await handleSignup(body);
+    // } else {
+    //   await handleLogin(body);
+    // }
   }
-
-  // const router = useRouter();
-
-  // const onLogin = (e) => {
-  //   e.preventDefault();
-
-  //   router.push('/dashboard');
-  // };
-
-  const loginHeader = () => (
-    <header>
-      <Nav background="rgb(71, 65, 49, .7)" textColorFixedHover="#ffb606" />
-    </header>
-  );
 
   const loginBody = () => (
     <Body className="flex items-center justify-center">
@@ -209,6 +195,11 @@ const LoginPage = (props) => {
     </Body>
   );
 
+  const loginHeader = () => (
+    <header>
+      <Nav background="rgb(71, 65, 49, .7)" textColorFixedHover="#ffb606" />
+    </header>
+  );
   const loginFooter = () => (
     <div>
       <h1>Footer will be here</h1>
@@ -217,7 +208,7 @@ const LoginPage = (props) => {
 
   return (
     <>
-      {/* {loginHeader()} */}
+      {loginHeader()}
       {loginBody()}
       {loginFooter()}
     </>

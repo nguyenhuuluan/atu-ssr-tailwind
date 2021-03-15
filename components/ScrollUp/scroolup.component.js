@@ -34,8 +34,8 @@ const ScroolUp = styled.div`
 const ScrollUpButton = () => {
   useEffect(() => {
     function handleMobileResize() {
-      if (window.scrollY > 200) document.body.getElementsByClassName('scroll-up-btn')[0].classList.add('show');
-      else document.body.getElementsByClassName('scroll-up-btn')[0].classList.remove('show');
+      if (window.scrollY > 200) document.body.getElementsByClassName('scroll-up-btn')[0]?.classList.add('show');
+      else document.body.getElementsByClassName('scroll-up-btn')[0]?.classList.remove('show');
     }
     window.addEventListener('scroll', handleMobileResize);
 

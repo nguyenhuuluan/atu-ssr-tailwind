@@ -133,8 +133,8 @@ const Home = () => (
     >
       <Title>__Best Order__</Title>
       <div className="order-list grid gap-4 mt-8 grid-cols-card">
-        {products.map((item) => (
-          <ProductCard {...item} />
+        {products.map((item, index) => (
+          <ProductCard key={+index} {...item} />
         ))}
       </div>
     </Section>
@@ -184,8 +184,8 @@ const Home = () => (
     <Section className="index-latest-new">
       <Title>__Lastest News__</Title>
       <div className="order-list grid gap-4 mt-8 grid-cols-card">
-        {news.map((item) => (
-          <NewsCard {...item} />
+        {news.map((item, index) => (
+          <NewsCard key={index} {...item} />
         ))}
       </div>
     </Section>
